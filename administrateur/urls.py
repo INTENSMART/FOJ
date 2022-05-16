@@ -26,6 +26,7 @@ from django.contrib.auth import views as password_view
 urlpatterns = [
     path('',views.home,name='index'),
     path('administrateurSignUp',views.inscriptionPage,name='administrateurSignUp'),
+    path('confirmationEmail',views.confirmationEmail,name='confirmationEmail'),
     #path('administrateurLogin',views.connexionPage,name='administrateurLogin'),
     path('administrateurLogin',auth_view.LoginView.as_view(template_name='connexion/login.html', redirect_authenticated_user=False,authentication_form=connexionForm),name='administrateurLogin'),
     path('etablissement',views.newEtablissement,name='etablissement'),

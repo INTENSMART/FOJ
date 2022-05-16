@@ -126,9 +126,14 @@ def activate(request, uidb64, token):
         user.save()
         login(request, user)
         # return redirect('home')
-        return redirect('administrateurLogin')
+        return redirect('confirmationEmail')
     else:
         return HttpResponse('Activation link is invalid!')
+
+
+def confirmationEmail(request):
+    return render(request, 'erreur_activation_email.html')
+
 
 
 def password_reset_request(request):

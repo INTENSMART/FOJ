@@ -30,11 +30,14 @@
         <div class="card-body p-0">
             <!-- Nested Row within Card Body -->
             <div class="row">
-                <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+                <div class="col-lg-5 d-none d-lg-block bg-register-image">
+                    <img src="{% static 'img/etablissement.jpg' %}" style="object-fit: cover; max-width: 100%; height: 100%;">
+
+                </div>
                 <div class="col-lg-7">
                     <div class="p-5">
                         <div class="text-center">
-                            <h1 class="h4 text-gray-900 mb-4">Renseignez votre école</h1>
+                            <h1 class="h4 text-gray-900 mb-4">Renseignez votre Etablissement</h1>
                         </div>
                         <form class="user" method="post" action="{% url 'dashboardAdmin' %}">
                             {% csrf_token %}
@@ -82,13 +85,9 @@
 
 
                         </form>
-                        <hr>
-                        <div class="text-center">
-                            <a class="small" href="forgot-password.html">Mot de passe oublié?</a>
-                        </div>
-                        <div class="text-center">
-                            <a class="small" href="login.html">Dejà un compte? Connectez-vous!</a>
-                        </div>
+
+
+
                     </div>
                 </div>
             </div>
