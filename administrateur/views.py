@@ -114,6 +114,9 @@ def connexionPage(request):
 def home(request):
     return render(request, 'accueil/index.html')
 
+def gestionEtablissement(request):
+    return render(request, 'dashboard/etablissement.html')
+
 
 def activate(request, uidb64, token):
     try:

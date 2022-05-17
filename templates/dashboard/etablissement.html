@@ -1,0 +1,56 @@
+{% extends 'dashboard/base.html' %}
+
+{% block title %}Gestion etablissement | InternSmart{% endblock title %}
+{% block page %}Etablissement{% endblock page %}
+
+{% block content %}
+
+
+                    <div class="row">
+
+                        <!-- Earnings (Monthly) Card Example -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-primary shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                <a href="{% url 'newEtablissement' %}">Ajouter un etablissement</a></div>
+
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class=" fas fa-plus fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Earnings (Monthly) Card Example -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-success shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                                <a href="#">Voir l'etablissement</a></div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-building fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+                    <!-- Content Row -->
+
+
+
+
+{% endblock content %}
+
