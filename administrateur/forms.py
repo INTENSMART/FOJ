@@ -33,13 +33,15 @@ class connexionForm(AuthenticationForm):
 class etablissementForm(forms.ModelForm):
     nomEtablissement = forms.CharField(help_text="Nom", widget=forms.TextInput(
         attrs={'class': 'form-control form-control-user'}))
-    telephone = forms.CharField(help_text="Numero de telephone", widget=forms.NumberInput(
+    telephone = forms.IntegerField(help_text="Numero de telephone", widget=forms.NumberInput(
         attrs={'class': 'form-control form-control-user'}))
     email = forms.CharField(help_text="Adresse mail", widget=forms.EmailInput(
         attrs={'class': 'form-control form-control-user'}))
     ville = forms.CharField(help_text="ville", widget=forms.TextInput(
         attrs={'class': 'form-control form-control-user'}))
     pays = forms.CharField(help_text="Pays", widget=forms.TextInput(
+        attrs={'class': 'form-control form-control-user'}))
+    created_etablissement_at = forms.CharField(help_text="Pays", widget=forms.TextInput(
         attrs={'class': 'form-control form-control-user'}))
     class Meta:
         model=modelEtablissement

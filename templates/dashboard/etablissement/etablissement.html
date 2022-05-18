@@ -1,6 +1,6 @@
 {% extends 'dashboard/base.html' %}
 
-{% block title %}Gestion etablissement | InternSmart{% endblock title %}
+{% block title %}Etablissement | InternSmart{% endblock title %}
 {% block page %}Etablissement{% endblock page %}
 
 {% block content %}
@@ -33,7 +33,7 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                <a href="#">Voir l'etablissement</a></div>
+                                                <a href="{% url 'listEtablissement' %}">Voir l'etablissement</a></div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-building fa-2x text-gray-300"></i>

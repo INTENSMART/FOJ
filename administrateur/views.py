@@ -19,7 +19,7 @@ from django.utils.encoding import force_bytes, force_str
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.contrib.auth.tokens import default_token_generator
 from django.db.models.query_utils import Q
-
+from django.contrib.auth.decorators import login_required
 from pythonProj import settings
 from . import forms
 from .forms import administrateurForm, connexionForm, forgotPasswordForm
@@ -28,8 +28,20 @@ from .forms import administrateurForm, etablissementForm
 from .forms import connexionForm
 
 # Create your views here.
+from .models import modelEtablissement
 from .tokens import generate_token
 
+
+
+#------------------------------------Accueil---------------------------------------------
+
+def home(request):
+    return render(request, 'accueil/index.html')
+
+
+
+
+#----------------------------Administrateur de l'etablissement-----------------------------------
 
 def inscriptionPage(request):
     # error = False
@@ -65,57 +77,61 @@ def inscriptionPage(request):
         # print(error)
     return render(request, 'inscription/register.html', {'form': form})
 
+@login_required(login_url='administrateurLogin')
+def dashboardAdmin(request):
+    return render(request, 'dashboard/dashboardAdmin.html')
+
+
+
+
+
+
+
+#-----------------------------Etablissement-------------------------------------------------
 
 def newEtablissement(request):
     form = etablissementForm()
     if request.method == 'POST':
+        print("POST")
         form = etablissementForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect('dashboardAdmin')
     else:
         print("Bonjour etablissement")
-    return render(request, 'inscription/ajout_etablissement.html', {'form': form})
+    return render(request, 'dashboard/etablissement/ajout_etablissement.html', {'form': form})
+
+def modifierEtablissement(request,pk):
+    etablissement=modelEtablissement.objects.get(id=pk)
+    form = etablissementForm(instance=etablissement)
+    if request.method == 'POST':
+        print("POST")
+        form = etablissementForm(request.POST,instance=etablissement)
+        if form.is_valid():
+            form.save()
+            return redirect('listEtablissement')
+    else:
+        print("Bonjour etablissement")
+    return render(request, 'dashboard/etablissement/modifier_etablissement.html', {'form': form})
 
 
-def dashboardAdmin(request):
-    return render(request, 'dashboard/dashboardAdmin.html')
+
+def listEtablissement(request):
+    print("Liste etablissement")
+    monEtablissement=modelEtablissement.objects.all()
+    print(monEtablissement)
+    context={'etablissement':monEtablissement}
+    return render(request, 'dashboard/etablissement/listEtablissement.html',context)
+
+def gestionEtablissement(request):
+    return render(request, 'dashboard/etablissement/etablissement.html')
 
 
 def confirmEmail(request):
     return render(request, 'confirm_email.html')
 
 
-def connexionPage(request):
-    error = False
-    print("Bonjour connexion")
-    if request.user.is_authenticated:
-        return render(request, 'dashboardAdmin.html')
-    if request.method == 'POST':
-        print("Bonjour POST")
 
-        username = request.POST["username"]
-        print(username)
-        password = request.POST["password"]
-        print(password)
-        user = authenticate(username=username, password=password)
-        if user is not None:
-            login(request, user)
-            return redirect('etablissement')
-
-        else:
-            form = connexionForm(request.POST)
-            return render(request, 'connexion/login.html', {'form': form})
-    else:
-        form = connexionForm()
-        return render(request, 'connexion/login.html', {'form': form})
-
-
-def home(request):
-    return render(request, 'accueil/index.html')
-
-def gestionEtablissement(request):
-    return render(request, 'dashboard/etablissement.html')
 
 
 def activate(request, uidb64, token):
