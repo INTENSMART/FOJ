@@ -33,7 +33,13 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                <a href="{% url 'listEtablissement' %}">Voir l'etablissement</a></div>
+
+                                                {%for element in etablissement%}
+                                                    {%if element.user.id == user.id%}
+                                                        <a href="{% url 'listEtablissement' element.id %}">Voir l'etablissement</a></div>
+                                                    {%endif %}
+                                                {%endfor%}
+
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-building fa-2x text-gray-300"></i>

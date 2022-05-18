@@ -88,7 +88,7 @@ def dashboardAdmin(request):
 
 
 #-----------------------------Etablissement-------------------------------------------------
-
+@login_required(login_url='administrateurLogin')
 def newEtablissement(request):
     form = etablissementForm()
     if request.method == 'POST':
@@ -101,6 +101,7 @@ def newEtablissement(request):
         print("Bonjour etablissement")
     return render(request, 'dashboard/etablissement/ajout_etablissement.html', {'form': form})
 
+@login_required(login_url='administrateurLogin')
 def modifierEtablissement(request,pk):
     etablissement=modelEtablissement.objects.get(id=pk)
     form = etablissementForm(instance=etablissement)
@@ -115,16 +116,19 @@ def modifierEtablissement(request,pk):
     return render(request, 'dashboard/etablissement/modifier_etablissement.html', {'form': form})
 
 
-
-def listEtablissement(request):
+@login_required(login_url='administrateurLogin')
+def listEtablissement(request, cle):
     print("Liste etablissement")
-    monEtablissement=modelEtablissement.objects.all()
+    monEtablissement=modelEtablissement.objects.get(id=cle)
     print(monEtablissement)
     context={'etablissement':monEtablissement}
     return render(request, 'dashboard/etablissement/listEtablissement.html',context)
 
+@login_required(login_url='administrateurLogin')
 def gestionEtablissement(request):
-    return render(request, 'dashboard/etablissement/etablissement.html')
+    monEtablissement=modelEtablissement.objects.all()
+    context = {'etablissement': monEtablissement}
+    return render(request, 'dashboard/etablissement/etablissement.html',context)
 
 
 def confirmEmail(request):

@@ -17,6 +17,7 @@ from django.db.models import constants
 
 
 class modelEtablissement(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE,blank=False, null=False)
     nomEtablissement = models.CharField(max_length=200, null=True, blank=False)
     telephone = models.IntegerField( null=True, blank=True)
     email = models.EmailField(max_length=200, null=True, blank=False)
